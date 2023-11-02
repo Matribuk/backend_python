@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:example_password@database/mydb'
 db = SQLAlchemy(app)
 
+# Défini les classes
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -18,7 +19,7 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(255), nullable=False)
 
-
+# Défini les routes et leurs fonctions attribué
 @app.route('/')
 def index():
     try:
@@ -71,6 +72,6 @@ def delete_task(task_id):
     else:
         return jsonify({'error': 'Invalid task ID'})
 
-
+# Récupère le name de Flask et on run l'app sur l'IP localhost
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
